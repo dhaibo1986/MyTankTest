@@ -8,9 +8,8 @@ import java.awt.event.WindowEvent;
 
 public class TankFrame extends Frame {
 
-	Tank myTank = new Tank(200,200,Dir.DOWN);
-
-	public static final  int SPEED = 10;
+	public static final int SPEED = 10;
+	Tank myTank = new Tank(200, 200, Dir.DOWN);
 
 
 	public TankFrame() {
@@ -87,7 +86,7 @@ public class TankFrame extends Frame {
 		}
 
 		private void setMainTankDir() {
-			if(!BL && ! BR && !BU && ! BD){
+			if (!BL && !BR && !BU && !BD) {
 				myTank.setMoveing(false);
 			} else {
 				myTank.setMoveing(true);
