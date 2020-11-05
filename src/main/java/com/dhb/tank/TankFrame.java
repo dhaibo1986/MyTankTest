@@ -10,6 +10,7 @@ public class TankFrame extends Frame {
 
 	public static final int SPEED = 10;
 	Tank myTank = new Tank(200, 200, Dir.DOWN);
+	Bullet b = new Bullet(300,300,Dir.DOWN);
 
 
 	public TankFrame() {
@@ -32,6 +33,7 @@ public class TankFrame extends Frame {
 	public void paint(Graphics g) {
 //		System.out.println("paint:"+dir + " x:"+x+" y:"+y);
 		myTank.paint(g);
+		b.paint(g);
 	}
 
 	class MyKeyListener extends KeyAdapter {
