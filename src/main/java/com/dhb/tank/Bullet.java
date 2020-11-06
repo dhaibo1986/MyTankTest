@@ -4,16 +4,21 @@ import java.awt.*;
 
 public class Bullet {
 
-	public static final int SPEED = 5;
+	public static final int SPEED = 10;
 	public static final int WIDTH = 30, HEIGHT = 30;
 	private int x;
 	private int y;
 	private Dir dir;
+	private TankFrame tf;
 
-	public Bullet(int x, int y, Dir dir) {
+
+	private boolean live = true;
+
+	public Bullet(int x, int y, Dir dir,TankFrame tf) {
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
+		this.tf = tf;
 	}
 
 	public static int getSPEED() {
@@ -29,6 +34,9 @@ public class Bullet {
 	}
 
 	private void move() {
+		if(!live) {
+			tf.bullets.remove(this);
+		}
 		switch (dir) {
 			case LEFT:
 				x -= SPEED;
@@ -45,10 +53,22 @@ public class Bullet {
 			default:
 				break;
 		}
+
+		if(x<0 || y<0 || x > TankFrame.GAME_WIDTH||y>TankFrame.GAME_HEIGHT){
+			this.live = false;
+		}
 	}
 
 	public int getX() {
 		return x;
+	}
+
+	public boolean isLive() {
+		return live;
+	}
+
+	public void setLive(boolean live) {
+		this.live = live;
 	}
 
 	public void setX(int x) {
