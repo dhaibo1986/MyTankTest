@@ -13,11 +13,14 @@ public class Tank {
 
 	private boolean moveing = false;
 
+	private TankFrame tf = null;
 
-	public Tank(int x, int y,Dir dir) {
+
+	public Tank(int x, int y,Dir dir,TankFrame tf) {
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
+		this.tf = tf;
 	}
 
 	public void paint(Graphics g) {
@@ -25,6 +28,10 @@ public class Tank {
 		g.setColor(Color.YELLOW);
 		g.fillOval(x, y, WIDTH, HEIGHT);
 		this.move();
+	}
+
+	public void fire() {
+		tf.b = new Bullet(this.x,this.y,this.dir);
 	}
 
 	private void move() {
