@@ -8,6 +8,9 @@ public class Tank {
 	private int y;
 	private Dir dir = Dir.DOWN;
 
+	public static final int WIDTH = 50;
+	public static final int HEIGHT = 50;
+
 	private boolean moveing = false;
 
 
@@ -18,7 +21,9 @@ public class Tank {
 	}
 
 	public void paint(Graphics g) {
-		g.fillRect(x, y, 50, 50);
+		Color c = g.getColor();
+		g.setColor(Color.YELLOW);
+		g.fillOval(x, y, WIDTH, HEIGHT);
 		this.move();
 	}
 
