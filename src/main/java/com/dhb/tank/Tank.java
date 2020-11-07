@@ -24,9 +24,23 @@ public class Tank {
 	}
 
 	public void paint(Graphics g) {
-		Color c = g.getColor();
-		g.setColor(Color.YELLOW);
-		g.fillRect(x, y, WIDTH, HEIGHT);
+		switch(dir){
+			case LEFT:
+				g.drawImage(ResourseMgr.tankL,x,y,null);
+				break;
+			case RIGHT:
+				g.drawImage(ResourseMgr.tankR,x,y,null);
+				break;
+			case DOWN:
+				g.drawImage(ResourseMgr.tankD,x,y,null);
+				break;
+			case UP:
+				g.drawImage(ResourseMgr.tankU,x,y,null);
+				break;
+
+			default:
+				break;
+		}
 		this.move();
 	}
 
