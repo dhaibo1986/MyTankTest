@@ -27,6 +27,7 @@ public class Explode {
 		g.drawImage(ResourseMgr.explodes[step++],x,y,null);
 		if(step >= ResourseMgr.explodes.length) {
 			step = 0;
+			this.tf.explodes.remove(this);
 		}
 	}
 
