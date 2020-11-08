@@ -1,12 +1,16 @@
 package com.dhb.tank;
 
 import java.awt.*;
+import java.util.Random;
 
 public class Tank {
-	public static final int SPEED = 10;
+	public static final int SPEED = 2;
 	private int x;
 	private int y;
 	private Dir dir = Dir.DOWN;
+	private Random random = new Random();
+
+	private Group group = Group.BAD;
 
 	private boolean living = true;
 
@@ -18,11 +22,12 @@ public class Tank {
 	private TankFrame tf = null;
 
 
-	public Tank(int x, int y,Dir dir,TankFrame tf) {
+	public Tank(int x, int y,Dir dir,Group group,TankFrame tf) {
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
 		this.tf = tf;
+		this.group = group;
 	}
 
 	public void die() {
@@ -57,7 +62,7 @@ public class Tank {
 	public void fire() {
 		int bX = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
 		int bY = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
-		tf.bullets.add( new Bullet(bX,bY,this.dir,tf));
+		tf.bullets.add( new Bullet(bX,bY,this.dir,this.group,tf));
 	}
 
 	private void move() {
@@ -79,10 +84,21 @@ public class Tank {
 					break;
 			}
 		}
+		if(this.group == Group.BAD && random.nextInt(20) > 18 ){
+			this.fire();
+		}
 	}
 
 	public boolean isMoveing() {
 		return moveing;
+	}
+
+	public Group getGroup() {
+		return group;
+	}
+
+	public void setGroup(Group group) {
+		this.group = group;
 	}
 
 	public void setMoveing(boolean moveing) {
