@@ -8,6 +8,8 @@ public class Tank {
 	private int y;
 	private Dir dir = Dir.DOWN;
 
+	private boolean living = true;
+
 	public static final int WIDTH = ResourseMgr.tankD.getWidth();
 	public static final int HEIGHT = ResourseMgr.tankD.getHeight();
 
@@ -23,7 +25,15 @@ public class Tank {
 		this.tf = tf;
 	}
 
+	public void die() {
+		this.living = false;
+	}
+
 	public void paint(Graphics g) {
+		if(!living) {
+			tf.tanks.remove(this);
+			return;
+		}
 		switch(dir){
 			case LEFT:
 				g.drawImage(ResourseMgr.tankL,x,y,null);
@@ -105,5 +115,13 @@ public class Tank {
 
 	public void setDir(Dir dir) {
 		this.dir = dir;
+	}
+
+	public boolean isLiving() {
+		return living;
+	}
+
+	public void setLiving(boolean living) {
+		this.living = living;
 	}
 }

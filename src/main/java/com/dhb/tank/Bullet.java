@@ -12,13 +12,18 @@ public class Bullet {
 	private TankFrame tf;
 
 
-	private boolean live = true;
+	private boolean living = true;
 
 	public Bullet(int x, int y, Dir dir,TankFrame tf) {
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
 		this.tf = tf;
+	}
+
+	public void die() {
+		this.living = false;
+		this.tf.bullets.remove(this);
 	}
 
 	public static int getSPEED() {
@@ -46,8 +51,17 @@ public class Bullet {
 		move();
 	}
 
+	public void  collideWith(Tank tank) {
+		Rectangle rectangle1 = new Rectangle(this.x,this.y,WIDTH,HEIGHT);
+		Rectangle rectangle2 = new Rectangle(tank.getX(),tank.getY(),Tank.WIDTH,Tank.HEIGHT);
+		if(rectangle1.intersects(rectangle2)) {
+			tank.die();
+			this.die();
+		}
+	}
+
 	private void move() {
-		if(!live) {
+		if(!living) {
 			tf.bullets.remove(this);
 		}
 		switch (dir) {
@@ -68,7 +82,7 @@ public class Bullet {
 		}
 
 		if(x<0 || y<0 || x > TankFrame.GAME_WIDTH||y>TankFrame.GAME_HEIGHT){
-			this.live = false;
+			this.living = false;
 		}
 	}
 
@@ -76,12 +90,12 @@ public class Bullet {
 		return x;
 	}
 
-	public boolean isLive() {
-		return live;
+	public boolean isLiving() {
+		return living;
 	}
 
-	public void setLive(boolean live) {
-		this.live = live;
+	public void setLiving(boolean living) {
+		this.living = living;
 	}
 
 	public void setX(int x) {
