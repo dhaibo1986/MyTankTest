@@ -17,7 +17,7 @@ public class Tank {
 	public static final int WIDTH = ResourseMgr.tankD.getWidth();
 	public static final int HEIGHT = ResourseMgr.tankD.getHeight();
 
-	private boolean moveing = false;
+	private boolean moveing = true;
 
 	private TankFrame tf = null;
 
@@ -87,8 +87,14 @@ public class Tank {
 		if(this.group == Group.BAD && random.nextInt(20) > 18 ){
 			this.fire();
 		}
+		if(this.group == Group.BAD && random.nextInt(20) > 18) {
+			randomDir();
+		}
 	}
 
+	private void randomDir() {
+		this.dir = Dir.values()[random.nextInt(4)];
+	}
 	public boolean isMoveing() {
 		return moveing;
 	}
