@@ -114,7 +114,7 @@ public class Tank {
 		}
 
 		if(this.y > TankFrame.GAME_HEIGHT - Tank.HEIGHT-2) {
-			x = TankFrame.GAME_HEIGHT-Tank.HEIGHT-2;
+			y = TankFrame.GAME_HEIGHT-Tank.HEIGHT-2;
 		}
 	}
 
