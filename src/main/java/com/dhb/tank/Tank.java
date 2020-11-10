@@ -4,18 +4,20 @@ import java.awt.*;
 import java.util.Random;
 
 public class Tank {
-	public static final int SPEED = 2;
+	public static final int SPEED = 5;
 	private int x;
 	private int y;
 	private Dir dir = Dir.DOWN;
 	private Random random = new Random();
 
+	Rectangle rect = new Rectangle();
+
 	private Group group = Group.BAD;
 
 	private boolean living = true;
 
-	public static final int WIDTH = ResourseMgr.tankD.getWidth();
-	public static final int HEIGHT = ResourseMgr.tankD.getHeight();
+	public static final int WIDTH = ResourseMgr.goodTankU.getWidth();
+	public static final int HEIGHT = ResourseMgr.goodTankU.getHeight();
 
 	private boolean moveing = true;
 
@@ -28,6 +30,10 @@ public class Tank {
 		this.dir = dir;
 		this.tf = tf;
 		this.group = group;
+		rect.x = x;
+		rect.y = y;
+		rect.height = HEIGHT;
+		rect.width = WIDTH;
 	}
 
 	public void die() {
@@ -41,16 +47,16 @@ public class Tank {
 		}
 		switch(dir){
 			case LEFT:
-				g.drawImage(ResourseMgr.tankL,x,y,null);
+				g.drawImage(this.group==Group.GOOD?ResourseMgr.goodTankL:ResourseMgr.badTankL,x,y,null);
 				break;
 			case RIGHT:
-				g.drawImage(ResourseMgr.tankR,x,y,null);
+				g.drawImage(this.group==Group.GOOD?ResourseMgr.goodTankR:ResourseMgr.badTankR,x,y,null);
 				break;
 			case DOWN:
-				g.drawImage(ResourseMgr.tankD,x,y,null);
+				g.drawImage(this.group==Group.GOOD?ResourseMgr.goodTankD:ResourseMgr.badTankD,x,y,null);
 				break;
 			case UP:
-				g.drawImage(ResourseMgr.tankU,x,y,null);
+				g.drawImage(this.group==Group.GOOD?ResourseMgr.goodTankU:ResourseMgr.badTankU,x,y,null);
 				break;
 
 			default:
@@ -84,11 +90,31 @@ public class Tank {
 					break;
 			}
 		}
+		rect.x = x;
+		rect.y = y;
 		if(this.group == Group.BAD && random.nextInt(20) > 18 ){
 			this.fire();
 		}
 		if(this.group == Group.BAD && random.nextInt(20) > 18) {
 			randomDir();
+		}
+
+		boundsCheck();
+	}
+
+	private void boundsCheck() {
+		if(this.x < 2) {
+			x = 0;
+		}
+		if(this.y < 28 ) {
+			y = 28;
+		}
+		if(this.x > (TankFrame.GAME_WIDTH-Tank.WIDTH -2)) {
+			x = TankFrame.GAME_WIDTH - Tank.WIDTH -2;
+		}
+
+		if(this.y > TankFrame.GAME_HEIGHT - Tank.HEIGHT-2) {
+			x = TankFrame.GAME_HEIGHT-Tank.HEIGHT-2;
 		}
 	}
 

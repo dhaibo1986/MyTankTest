@@ -12,6 +12,8 @@ public class Bullet {
 	private TankFrame tf;
 	private Group group = Group.BAD;
 
+	Rectangle rect = new Rectangle();
+
 
 	private boolean living = true;
 
@@ -21,6 +23,10 @@ public class Bullet {
 		this.dir = dir;
 		this.tf = tf;
 		this.group= group;
+		rect.x = this.x;
+		rect.y = this.y;
+		rect.width = WIDTH;
+		rect.height = HEIGHT;
 	}
 
 	public void die() {
@@ -57,9 +63,7 @@ public class Bullet {
 		if(this.group == tank.getGroup()) {
 			return;
 		}
-		Rectangle rectangle1 = new Rectangle(this.x,this.y,WIDTH,HEIGHT);
-		Rectangle rectangle2 = new Rectangle(tank.getX(),tank.getY(),Tank.WIDTH,Tank.HEIGHT);
-		if(rectangle1.intersects(rectangle2)) {
+		if(this.rect.intersects(tank.rect)) {
 			tank.die();
 			this.die();
 			int eX = tank.getX() + Tank.WIDTH/2 - Explode.WIDTH/2;
@@ -88,6 +92,8 @@ public class Bullet {
 			default:
 				break;
 		}
+		this.rect.x = x;
+		this.rect.y = y;
 
 		if(x<0 || y<0 || x > TankFrame.GAME_WIDTH||y>TankFrame.GAME_HEIGHT){
 			this.living = false;
