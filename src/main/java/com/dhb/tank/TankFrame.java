@@ -15,11 +15,10 @@ public class TankFrame extends Frame {
 	List<Bullet> bullets = new ArrayList<>();
 	List<Tank>  tanks = new ArrayList<>();
 	List<Explode> explodes = new ArrayList<>();
-	Bullet b = new Bullet(300,300,Dir.DOWN,Group.GOOD,this);
 
 
-	public static final int GAME_WIDTH = 1080;
-	public static final int GAME_HEIGHT = 960;
+	public static final int GAME_WIDTH = ProrertyMgr.getInt("gameWidth");
+	public static final int GAME_HEIGHT = ProrertyMgr.getInt("gameHeight");
 
 
 
