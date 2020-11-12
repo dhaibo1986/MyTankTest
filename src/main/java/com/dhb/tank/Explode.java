@@ -4,9 +4,9 @@ import java.awt.*;
 
 public class Explode {
 
-	public static int WIDTH = ResourseMgr.explodes[0].getWidth();
+	public static int WIDTH = ResourseMgr.getInstance().getExplodes()[0].getWidth();
 
-	public static int HEIGHT = ResourseMgr.explodes[0].getHeight();
+	public static int HEIGHT = ResourseMgr.getInstance().getExplodes()[0].getHeight();
 
 	private int x,y;
 
@@ -24,8 +24,8 @@ public class Explode {
 	}
 
 	public void paint(Graphics g) {
-		g.drawImage(ResourseMgr.explodes[step++],x,y,null);
-		if(step >= ResourseMgr.explodes.length) {
+		g.drawImage(ResourseMgr.getInstance().getExplodes()[step++],x,y,null);
+		if(step >= ResourseMgr.getInstance().getExplodes().length) {
 			step = 0;
 			this.tf.explodes.remove(this);
 		}

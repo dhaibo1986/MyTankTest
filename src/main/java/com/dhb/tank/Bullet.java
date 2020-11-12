@@ -5,28 +5,30 @@ import java.awt.*;
 public class Bullet {
 
 	public static final int SPEED = 10;
-	public static final int WIDTH = ResourseMgr.bulletD.getWidth(), HEIGHT = ResourseMgr.bulletD.getHeight();
+	public static final int WIDTH = ResourseMgr.getInstance().getBulletD().getWidth(),
+			HEIGHT = ResourseMgr.getInstance().getBulletD().getHeight();
+	Rectangle rect = new Rectangle();
 	private int x;
 	private int y;
 	private Dir dir;
 	private TankFrame tf;
 	private Group group = Group.BAD;
-
-	Rectangle rect = new Rectangle();
-
-
 	private boolean living = true;
 
-	public Bullet(int x, int y, Dir dir,Group group,TankFrame tf) {
+	public Bullet(int x, int y, Dir dir, Group group, TankFrame tf) {
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
 		this.tf = tf;
-		this.group= group;
+		this.group = group;
 		rect.x = this.x;
 		rect.y = this.y;
 		rect.width = WIDTH;
 		rect.height = HEIGHT;
+	}
+
+	public static int getSPEED() {
+		return SPEED;
 	}
 
 	public void die() {
@@ -34,23 +36,19 @@ public class Bullet {
 		this.tf.bullets.remove(this);
 	}
 
-	public static int getSPEED() {
-		return SPEED;
-	}
-
 	public void paint(Graphics g) {
-		switch(dir){
+		switch (dir) {
 			case LEFT:
-				g.drawImage(ResourseMgr.bulletL,x,y,null);
+				g.drawImage(ResourseMgr.getInstance().getBulletL(), x, y, null);
 				break;
 			case RIGHT:
-				g.drawImage(ResourseMgr.bulletR,x,y,null);
+				g.drawImage(ResourseMgr.getInstance().getBulletR(), x, y, null);
 				break;
 			case DOWN:
-				g.drawImage(ResourseMgr.bulletD,x,y,null);
+				g.drawImage(ResourseMgr.getInstance().getBulletD(), x, y, null);
 				break;
 			case UP:
-				g.drawImage(ResourseMgr.bulletU,x,y,null);
+				g.drawImage(ResourseMgr.getInstance().getBulletU(), x, y, null);
 				break;
 
 			default:
@@ -59,21 +57,21 @@ public class Bullet {
 		move();
 	}
 
-	public void  collideWith(Tank tank) {
-		if(this.group == tank.getGroup()) {
+	public void collideWith(Tank tank) {
+		if (this.group == tank.getGroup()) {
 			return;
 		}
-		if(this.rect.intersects(tank.rect)) {
+		if (this.rect.intersects(tank.rect)) {
 			tank.die();
 			this.die();
-			int eX = tank.getX() + Tank.WIDTH/2 - Explode.WIDTH/2;
-			int eY = tank.getY() + Tank.HEIGHT/2 - Explode.HEIGHT/2;
-			this.tf.explodes.add(new Explode(eX,eY,true,this.tf));
+			int eX = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
+			int eY = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
+			this.tf.explodes.add(new Explode(eX, eY, true, this.tf));
 		}
 	}
 
 	private void move() {
-		if(!living) {
+		if (!living) {
 			tf.bullets.remove(this);
 		}
 		switch (dir) {
@@ -95,13 +93,17 @@ public class Bullet {
 		this.rect.x = x;
 		this.rect.y = y;
 
-		if(x<0 || y<0 || x > TankFrame.GAME_WIDTH||y>TankFrame.GAME_HEIGHT){
+		if (x < 0 || y < 0 || x > TankFrame.GAME_WIDTH || y > TankFrame.GAME_HEIGHT) {
 			this.living = false;
 		}
 	}
 
 	public int getX() {
 		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
 	}
 
 	public boolean isLiving() {
@@ -118,10 +120,6 @@ public class Bullet {
 
 	public void setGroup(Group group) {
 		this.group = group;
-	}
-
-	public void setX(int x) {
-		this.x = x;
 	}
 
 	public int getY() {

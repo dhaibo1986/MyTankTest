@@ -16,8 +16,8 @@ public class Tank {
 
 	private boolean living = true;
 
-	public static final int WIDTH = ResourseMgr.goodTankU.getWidth();
-	public static final int HEIGHT = ResourseMgr.goodTankU.getHeight();
+	public static final int WIDTH = ResourseMgr.getInstance().getGoodTankU().getWidth();
+	public static final int HEIGHT = ResourseMgr.getInstance().getGoodTankU().getHeight();
 
 	private boolean moveing = true;
 
@@ -47,16 +47,16 @@ public class Tank {
 		}
 		switch(dir){
 			case LEFT:
-				g.drawImage(this.group==Group.GOOD?ResourseMgr.goodTankL:ResourseMgr.badTankL,x,y,null);
+				g.drawImage(this.group==Group.GOOD?ResourseMgr.getInstance().getGoodTankL() :ResourseMgr.getInstance().getBadTankL(),x,y,null);
 				break;
 			case RIGHT:
-				g.drawImage(this.group==Group.GOOD?ResourseMgr.goodTankR:ResourseMgr.badTankR,x,y,null);
+				g.drawImage(this.group==Group.GOOD?ResourseMgr.getInstance().getGoodTankR() :ResourseMgr.getInstance().getBadTankR(),x,y,null);
 				break;
 			case DOWN:
-				g.drawImage(this.group==Group.GOOD?ResourseMgr.goodTankD:ResourseMgr.badTankD,x,y,null);
+				g.drawImage(this.group==Group.GOOD?ResourseMgr.getInstance().getGoodTankD() :ResourseMgr.getInstance().getBadTankD(),x,y,null);
 				break;
 			case UP:
-				g.drawImage(this.group==Group.GOOD?ResourseMgr.goodTankU:ResourseMgr.badTankU,x,y,null);
+				g.drawImage(this.group==Group.GOOD?ResourseMgr.getInstance().getGoodTankU() :ResourseMgr.getInstance().getBadTankU(),x,y,null);
 				break;
 
 			default:

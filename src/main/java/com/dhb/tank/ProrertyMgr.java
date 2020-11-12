@@ -2,8 +2,16 @@ package com.dhb.tank;
 
 import java.io.IOException;
 import java.util.Properties;
-
+/**
+*@author haibo.duan
+*@description  静态属性获取，将构造方法设为private，避免其他类将此类实例化
+*@date  2020/11/12 19:12
+*/
 public class ProrertyMgr {
+
+	private ProrertyMgr() {
+
+	}
 
 	static Properties props = new Properties();
 
