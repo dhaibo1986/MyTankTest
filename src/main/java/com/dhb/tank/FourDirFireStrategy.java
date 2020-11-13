@@ -1,0 +1,44 @@
+package com.dhb.tank;
+
+public class FourDirFireStrategy implements FireStrategy{
+
+
+	@Override
+	public void fire(Tank t) {
+		int bX = t.getX() + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
+		int bY = t.getY() + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
+
+		Dir[] dirs = Dir.values();
+		for(Dir dir:dirs) {
+			t.getTf().bullets.add(new Bullet(bX, bY, dir, t.getGroup(), t.getTf()));
+		}
+		if(t.getGroup() == Group.GOOD) {
+			new Thread(() -> {
+				new Audio("audio/tank_fire.wav");
+			}).start();
+		}
+	}
+
+	public static FourDirFireStrategy getInstance() {
+		return FourDirFireStrategy.Sigleton.INSTANCE.getInstance();
+	}
+
+
+	private FourDirFireStrategy() {
+
+	}
+
+
+	private enum Sigleton{
+		INSTANCE;
+
+		private final FourDirFireStrategy instance;
+		Sigleton(){
+			instance = new FourDirFireStrategy();
+		}
+
+		public FourDirFireStrategy getInstance() {
+			return instance;
+		}
+	}
+}
