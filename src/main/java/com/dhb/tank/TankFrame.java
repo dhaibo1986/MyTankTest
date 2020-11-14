@@ -6,7 +6,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TankFrame extends Frame {
 
@@ -15,6 +17,7 @@ public class TankFrame extends Frame {
 	List<Bullet> bullets = new ArrayList<>();
 	List<Tank>  tanks = new ArrayList<>();
 	List<Explode> explodes = new ArrayList<>();
+	Map<String,FireStrategy> strategyMap = new HashMap<>();
 
 
 	public static final int GAME_WIDTH = ProrertyMgr.getInt("gameWidth");
@@ -131,7 +134,8 @@ public class TankFrame extends Frame {
 					break;
 
 				case KeyEvent.VK_CONTROL:
-					myTank.fire();
+					String skey = ProrertyMgr.getString("goodFs");
+					myTank.fire(strategyMap.get(skey));
 					break;
 				default:
 					break;
