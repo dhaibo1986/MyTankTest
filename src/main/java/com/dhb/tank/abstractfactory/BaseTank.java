@@ -110,11 +110,6 @@ public abstract class BaseTank {
 		this.moveing = moveing;
 	}
 
-	public TankFrame getTf() {
-		return tf;
-	}
+	public abstract TankFrame getTf();
 
-	public void setTf(TankFrame tf) {
-		this.tf = tf;
-	}
 }

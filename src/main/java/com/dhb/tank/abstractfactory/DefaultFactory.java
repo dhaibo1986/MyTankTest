@@ -17,6 +17,6 @@ public class DefaultFactory extends GameFactory{
 
 	@Override
 	public BaseBullet createBullet(int x, int y, Dir dir, Group group, TankFrame tf) {
-		return new RectBullet(x,y,dir,group,tf);
+		return new Bullet(x,y,dir,group,tf);
 	}
 }

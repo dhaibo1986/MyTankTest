@@ -191,4 +191,13 @@ public class DefaultTank extends BaseTank {
 	public void setTf(TankFrame tf) {
 		this.tf = tf;
 	}*/
+
+	@Override
+	public TankFrame getTf() {
+		return tf;
+	}
+
+	public void setTf(TankFrame tf) {
+		this.tf = tf;
+	}
 }
