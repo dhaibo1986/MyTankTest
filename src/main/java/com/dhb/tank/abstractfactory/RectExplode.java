@@ -1,10 +1,12 @@
-package com.dhb.tank;
+package com.dhb.tank.abstractfactory;
 
-import com.dhb.tank.abstractfactory.BaseExplode;
+import com.dhb.tank.ResourseMgr;
+import com.dhb.tank.TankFrame;
 
 import java.awt.*;
 
-public class Explode extends BaseExplode {
+public class RectExplode extends BaseExplode{
+
 
 	public static int WIDTH = ResourseMgr.getInstance().getExplodes()[0].getWidth();
 
@@ -18,7 +20,7 @@ public class Explode extends BaseExplode {
 
 	private int step = 0;
 
-	public Explode(int x, int y, boolean living, TankFrame tf) {
+	public RectExplode(int x, int y, boolean living, TankFrame tf) {
 		this.x = x;
 		this.y = y;
 		this.living = living;
@@ -27,11 +29,15 @@ public class Explode extends BaseExplode {
 
 	@Override
 	public void paint(Graphics g) {
-		g.drawImage(ResourseMgr.getInstance().getExplodes()[step++],x,y,null);
-		if(step >= ResourseMgr.getInstance().getExplodes().length) {
-			step = 0;
-			this.tf.explodes.remove(this);
+		Color  c = g.getColor();
+		g.setColor(Color.RED);
+		g.fillRect(x,y,10*step,10*step);
+		step++;
+		if(step>=5){
+			tf.explodes.remove(this);
 		}
+		g.setColor(c);
+
 	}
 
 	public int getX() {

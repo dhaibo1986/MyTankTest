@@ -1,11 +1,11 @@
-package com.dhb.tank;
+package com.dhb.tank.abstractfactory;
 
-import com.dhb.tank.abstractfactory.BaseTank;
+import com.dhb.tank.*;
 
 import java.awt.*;
 import java.util.Random;
 
-public class Tank extends BaseTank {
+public class DefaultTank extends BaseTank {
 	public static final int SPEED = 5;
 	private int x;
 	private int y;
@@ -26,7 +26,7 @@ public class Tank extends BaseTank {
 	private TankFrame tf = null;
 
 
-	public Tank(int x, int y,Dir dir,Group group,TankFrame tf) {
+	public DefaultTank(int x, int y, Dir dir, Group group, TankFrame tf) {
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
@@ -120,12 +120,12 @@ public class Tank extends BaseTank {
 		if(this.y < 28 ) {
 			y = 28;
 		}
-		if(this.x > (TankFrame.GAME_WIDTH-Tank.WIDTH -2)) {
-			x = TankFrame.GAME_WIDTH - Tank.WIDTH -2;
+		if(this.x > (TankFrame.GAME_WIDTH- DefaultTank.WIDTH -2)) {
+			x = TankFrame.GAME_WIDTH - DefaultTank.WIDTH -2;
 		}
 
-		if(this.y > TankFrame.GAME_HEIGHT - Tank.HEIGHT-2) {
-			y = TankFrame.GAME_HEIGHT-Tank.HEIGHT-2;
+		if(this.y > TankFrame.GAME_HEIGHT - DefaultTank.HEIGHT-2) {
+			y = TankFrame.GAME_HEIGHT- DefaultTank.HEIGHT-2;
 		}
 	}
 /*
