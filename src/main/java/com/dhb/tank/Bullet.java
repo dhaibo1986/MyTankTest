@@ -1,11 +1,8 @@
 package com.dhb.tank;
 
-import com.dhb.tank.abstractfactory.BaseBullet;
-import com.dhb.tank.abstractfactory.BaseTank;
-
 import java.awt.*;
 
-public class Bullet extends BaseBullet {
+public class Bullet {
 
 	public static final int SPEED = 10;
 	public static final int WIDTH = ResourseMgr.getInstance().getBulletD().getWidth(),
@@ -39,7 +36,6 @@ public class Bullet extends BaseBullet {
 		this.tf.bullets.remove(this);
 	}
 
-	@Override
 	public void paint(Graphics g) {
 		switch (dir) {
 			case LEFT:
@@ -61,8 +57,7 @@ public class Bullet extends BaseBullet {
 		move();
 	}
 
-	@Override
-	public void collideWith(BaseTank tank) {
+	public void collideWith(Tank tank) {
 		if (this.group == tank.getGroup()) {
 			return;
 		}
@@ -71,8 +66,7 @@ public class Bullet extends BaseBullet {
 			this.die();
 			int eX = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
 			int eY = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
-
-			this.tf.explodes.add(this.tf.gf.createExplote(eX, eY, true, this.tf));
+			this.tf.explodes.add(new Explode(eX, eY, true, this.tf));
 		}
 	}
 

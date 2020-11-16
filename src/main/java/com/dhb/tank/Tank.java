@@ -1,11 +1,10 @@
 package com.dhb.tank;
 
-import com.dhb.tank.abstractfactory.BaseTank;
 
 import java.awt.*;
 import java.util.Random;
 
-public class Tank extends BaseTank {
+public class Tank {
 	public static final int SPEED = 5;
 	public static final int WIDTH = ResourseMgr.getInstance().getGoodTankU().getWidth();
 	public static final int HEIGHT = ResourseMgr.getInstance().getGoodTankU().getHeight();
@@ -33,11 +32,14 @@ public class Tank extends BaseTank {
 		rect.width = WIDTH;
 	}
 
-	/*public void die() {
+	public static int getSPEED() {
+		return SPEED;
+	}
+
+	public void die() {
 		this.living = false;
 	}
-*/
-	@Override
+
 	public void paint(Graphics g) {
 		if (!living) {
 			tf.tanks.remove(this);
@@ -63,15 +65,14 @@ public class Tank extends BaseTank {
 		this.move();
 	}
 
-/*	public Rectangle getRect() {
+	public Rectangle getRect() {
 		return rect;
-	}*/
+	}
 
-	/*	public void setRect(Rectangle rect) {
-			this.rect = rect;
-		}
-	*/
-	@Override
+	public void setRect(Rectangle rect) {
+		this.rect = rect;
+	}
+
 	public void fire(FireStrategy fireStrategy) {
 		fireStrategy.fire(this);
 	}
@@ -124,70 +125,58 @@ public class Tank extends BaseTank {
 		}
 	}
 
-	/*
-		private void randomDir() {
-			this.dir = Dir.values()[random.nextInt(4)];
-		}
-		public boolean isMoveing() {
-			return moveing;
-		}
+	private void randomDir() {
+		this.dir = Dir.values()[random.nextInt(4)];
+	}
 
-		public Group getGroup() {
-			return group;
-		}
+	public boolean isMoveing() {
+		return moveing;
+	}
 
-		public void setGroup(Group group) {
-			this.group = group;
-		}
+	public void setMoveing(boolean moveing) {
+		this.moveing = moveing;
+	}
 
-		public void setMoveing(boolean moveing) {
-			this.moveing = moveing;
-		}
+	public Group getGroup() {
+		return group;
+	}
 
-		public static int getSPEED() {
-			return SPEED;
-		}
+	public void setGroup(Group group) {
+		this.group = group;
+	}
 
-		public int getX() {
-			return x;
-		}
+	public int getX() {
+		return x;
+	}
 
-		public void setX(int x) {
-			this.x = x;
-		}
+	public void setX(int x) {
+		this.x = x;
+	}
 
-		public int getY() {
-			return y;
-		}
+	public int getY() {
+		return y;
+	}
 
-		public void setY(int y) {
-			this.y = y;
-		}
+	public void setY(int y) {
+		this.y = y;
+	}
 
-		public Dir getDir() {
-			return dir;
-		}
+	public Dir getDir() {
+		return dir;
+	}
 
-		public void setDir(Dir dir) {
-			this.dir = dir;
-		}
+	public void setDir(Dir dir) {
+		this.dir = dir;
+	}
 
-		public boolean isLiving() {
-			return living;
-		}
+	public boolean isLiving() {
+		return living;
+	}
 
-		public void setLiving(boolean living) {
-			this.living = living;
-		}
+	public void setLiving(boolean living) {
+		this.living = living;
+	}
 
-		public TankFrame getTf() {
-			return tf;
-		}
-
-		public void setTf(TankFrame tf) {
-			this.tf = tf;
-		}*/
-	@Override
 	public TankFrame getTf() {
 		return tf;
 	}
@@ -195,4 +184,5 @@ public class Tank extends BaseTank {
 	public void setTf(TankFrame tf) {
 		this.tf = tf;
 	}
+
 }

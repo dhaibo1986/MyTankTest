@@ -1,7 +1,5 @@
 package com.dhb.tank;
 
-import com.dhb.tank.abstractfactory.*;
-
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -15,14 +13,11 @@ import java.util.Map;
 public class TankFrame extends Frame {
 
 	public static final int SPEED = 10;
-
-	public List<BaseBullet> bullets = new ArrayList<>();
-	public List<BaseTank>  tanks = new ArrayList<>();
-	public List<BaseExplode> explodes = new ArrayList<>();
-	public Map<String,FireStrategy> strategyMap = new HashMap<>();
-
-	public GameFactory gf = new DefaultFactory();
-	public BaseTank myTank = gf.createTank(200, 400, Dir.UP,Group.GOOD,this);
+	Tank myTank = new Tank(200, 400, Dir.UP,Group.GOOD,this);
+	List<Bullet> bullets = new ArrayList<>();
+	List<Tank>  tanks = new ArrayList<>();
+	List<Explode> explodes = new ArrayList<>();
+	Map<String,FireStrategy> strategyMap = new HashMap<>();
 
 
 	public static final int GAME_WIDTH = ProrertyMgr.getInt("gameWidth");

@@ -1,11 +1,17 @@
 package com.dhb.tank;
 
-import com.dhb.tank.abstractfactory.BaseTank;
-
 public class DefaultFireStrategy implements FireStrategy {
 
+	private DefaultFireStrategy() {
+
+	}
+
+	public static DefaultFireStrategy getInstance() {
+		return DefaultSigleton.INSTANCE.getInstance();
+	}
+
 	@Override
-	public void fire(BaseTank t) {
+	public void fire(Tank t) {
 		int bX = t.getX() + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
 		int bY = t.getY() + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
 		t.getTf().bullets.add(new Bullet(bX, bY, t.getDir(), t.getGroup(), t.getTf()));
@@ -16,19 +22,12 @@ public class DefaultFireStrategy implements FireStrategy {
 		}
 	}
 
-	public static DefaultFireStrategy getInstance() {
-		return DefaultSigleton.INSTANCE.getInstance();
-	}
-
-	private DefaultFireStrategy() {
-
-	}
-
-	private enum DefaultSigleton{
+	private enum DefaultSigleton {
 		INSTANCE;
 
 		private final DefaultFireStrategy instance;
-		DefaultSigleton(){
+
+		DefaultSigleton() {
 			instance = new DefaultFireStrategy();
 		}
 
