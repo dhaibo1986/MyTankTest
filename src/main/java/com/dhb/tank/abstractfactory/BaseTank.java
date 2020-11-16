@@ -1,7 +1,5 @@
 package com.dhb.tank.abstractfactory;
 
-import com.dhb.tank.*;
-
 import java.awt.*;
 import java.util.Random;
 
@@ -22,9 +20,7 @@ public abstract class BaseTank {
 	protected TankFrame tf;
 
 
-	public void die() {
-		this.living = false;
-	}
+	public abstract void die();
 
 	public abstract void paint(Graphics g);
 
@@ -46,9 +42,8 @@ public abstract class BaseTank {
 		return HEIGHT;
 	}
 
-	public Rectangle getRect() {
-		return rect;
-	}
+	public abstract Rectangle getRect();
+
 
 	public void setRect(Rectangle rect) {
 		this.rect = rect;
@@ -70,9 +65,8 @@ public abstract class BaseTank {
 		this.y = y;
 	}
 
-	public Dir getDir() {
-		return dir;
-	}
+	public abstract Dir getDir();
+
 
 	public void setDir(Dir dir) {
 		this.dir = dir;
@@ -86,9 +80,8 @@ public abstract class BaseTank {
 		this.random = random;
 	}
 
-	public Group getGroup() {
-		return group;
-	}
+
+	public abstract Group getGroup();
 
 	public void setGroup(Group group) {
 		this.group = group;

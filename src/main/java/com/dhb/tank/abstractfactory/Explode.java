@@ -3,18 +3,21 @@ package com.dhb.tank.abstractfactory;
 
 import java.awt.*;
 
-public class RectExplode extends BaseExplode {
-
+public class Explode extends BaseExplode {
 
 	public static int WIDTH = ResourseMgr.getInstance().getExplodes()[0].getWidth();
 
 	public static int HEIGHT = ResourseMgr.getInstance().getExplodes()[0].getHeight();
-	TankFrame tf;
-	private int x, y;
+
+	private int x,y;
+
 	private boolean living = true;
+
+	TankFrame tf;
+
 	private int step = 0;
 
-	public RectExplode(int x, int y, boolean living, TankFrame tf) {
+	public Explode(int x, int y, boolean living, TankFrame tf) {
 		this.x = x;
 		this.y = y;
 		this.living = living;
@@ -23,15 +26,11 @@ public class RectExplode extends BaseExplode {
 
 	@Override
 	public void paint(Graphics g) {
-		Color c = g.getColor();
-		g.setColor(Color.RED);
-		g.fillRect(x, y, 10 * step, 10 * step);
-		step++;
-		if (step >= 5) {
-			tf.explodes.remove(this);
+		g.drawImage(ResourseMgr.getInstance().getExplodes()[step++],x,y,null);
+		if(step >= ResourseMgr.getInstance().getExplodes().length) {
+			step = 0;
+			this.tf.explodes.remove(this);
 		}
-		g.setColor(c);
-
 	}
 
 	public int getX() {

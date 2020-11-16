@@ -1,7 +1,5 @@
 package com.dhb.tank.abstractfactory;
 
-import com.dhb.tank.*;
-
 import java.awt.*;
 import java.util.Random;
 
@@ -192,6 +190,24 @@ public class DefaultTank extends BaseTank {
 		this.tf = tf;
 	}*/
 
+	@Override
+	public Group getGroup() {
+		return group;
+	}
+	@Override
+	public void die() {
+		this.living = false;
+	}
+
+	@Override
+	public Rectangle getRect() {
+		return rect;
+	}
+
+	@Override
+	public Dir getDir() {
+		return dir;
+	}
 	@Override
 	public TankFrame getTf() {
 		return tf;

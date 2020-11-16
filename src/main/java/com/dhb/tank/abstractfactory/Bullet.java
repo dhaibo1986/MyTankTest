@@ -3,7 +3,7 @@ package com.dhb.tank.abstractfactory;
 
 import java.awt.*;
 
-public class RectBullet extends BaseBullet {
+public class Bullet extends BaseBullet {
 
 	public static final int SPEED = 10;
 	public static final int WIDTH = ResourseMgr.getInstance().getBulletD().getWidth(),
@@ -16,7 +16,7 @@ public class RectBullet extends BaseBullet {
 	private Group group = Group.BAD;
 	private boolean living = true;
 
-	public RectBullet(int x, int y, Dir dir, Group group, TankFrame tf) {
+	public Bullet(int x, int y, Dir dir, Group group, TankFrame tf) {
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
@@ -35,6 +35,28 @@ public class RectBullet extends BaseBullet {
 	public void die() {
 		this.living = false;
 		this.tf.bullets.remove(this);
+	}
+
+	@Override
+	public void paint(Graphics g) {
+		switch (dir) {
+			case LEFT:
+				g.drawImage(ResourseMgr.getInstance().getBulletL(), x, y, null);
+				break;
+			case RIGHT:
+				g.drawImage(ResourseMgr.getInstance().getBulletR(), x, y, null);
+				break;
+			case DOWN:
+				g.drawImage(ResourseMgr.getInstance().getBulletD(), x, y, null);
+				break;
+			case UP:
+				g.drawImage(ResourseMgr.getInstance().getBulletU(), x, y, null);
+				break;
+
+			default:
+				break;
+		}
+		move();
 	}
 
 	@Override
@@ -127,14 +149,4 @@ public class RectBullet extends BaseBullet {
 	public void setTf(TankFrame tf) {
 		this.tf = tf;
 	}
-
-
-	@Override
-	public void paint(Graphics g) {
-		Color c = g.getColor();
-		g.setColor(Color.YELLOW);
-		g.fillRect(x, y, 20, 20);
-		move();
-	}
-
 }

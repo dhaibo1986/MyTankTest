@@ -1,7 +1,5 @@
 package com.dhb.tank.abstractfactory;
 
-import com.dhb.tank.*;
-
 import java.awt.*;
 
 public class RectTank  extends BaseTank{
@@ -19,6 +17,10 @@ public class RectTank  extends BaseTank{
 		rect.width = WIDTH;
 	}
 
+	@Override
+	public Group getGroup() {
+		return group;
+	}
 
 	@Override
 	public void paint(Graphics g) {
@@ -71,6 +73,20 @@ public class RectTank  extends BaseTank{
 		boundsCheck();
 	}
 
+	@Override
+	public void die() {
+		this.living = false;
+	}
+
+	@Override
+	public Rectangle getRect() {
+		return rect;
+	}
+
+	@Override
+	public Dir getDir() {
+		return dir;
+	}
 	private void boundsCheck() {
 		if(this.x < 2) {
 			x = 0;
@@ -78,12 +94,12 @@ public class RectTank  extends BaseTank{
 		if(this.y < 28 ) {
 			y = 28;
 		}
-		if(this.x > (TankFrame.GAME_WIDTH-Tank.WIDTH -2)) {
-			x = TankFrame.GAME_WIDTH - Tank.WIDTH -2;
+		if(this.x > (TankFrame.GAME_WIDTH- BaseTank.WIDTH -2)) {
+			x = TankFrame.GAME_WIDTH - BaseTank.WIDTH -2;
 		}
 
-		if(this.y > TankFrame.GAME_HEIGHT - Tank.HEIGHT-2) {
-			y = TankFrame.GAME_HEIGHT-Tank.HEIGHT-2;
+		if(this.y > TankFrame.GAME_HEIGHT - BaseTank.HEIGHT-2) {
+			y = TankFrame.GAME_HEIGHT-BaseTank.HEIGHT-2;
 		}
 	}
 
