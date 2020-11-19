@@ -5,19 +5,12 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class TankFrame extends Frame {
 
+	GameModel gm = new GameModel();
+
 	public static final int SPEED = 10;
-	Tank myTank = new Tank(200, 400, Dir.UP,Group.GOOD,this);
-	List<Bullet> bullets = new ArrayList<>();
-	List<Tank>  tanks = new ArrayList<>();
-	List<Explode> explodes = new ArrayList<>();
-	Map<String,FireStrategy> strategyMap = new HashMap<>();
 
 
 	public static final int GAME_WIDTH = ProrertyMgr.getInt("gameWidth");
@@ -59,32 +52,7 @@ public class TankFrame extends Frame {
 
 	@Override
 	public void paint(Graphics g) {
-		Color c = g.getColor();
-		g.setColor(Color.WHITE);
-		g.drawString("子弹的数量："+bullets.size(),10,60);
-		g.drawString("敌方坦克数量："+tanks.size(),10,75);
-		g.drawString("爆炸数量："+explodes.size(),10,90);
-		g.setColor(c);
-		myTank.paint(g);
-		for(int i=0;i<tanks.size();i++) {
-			tanks.get(i).paint(g);
-		}
-		for(int i=0;i< bullets.size();i++){
-			bullets.get(i).paint(g);
-		}
-
-		for(int i=0;i<bullets.size();i++) {
-			for(int j=0;j<tanks.size();j++) {
-				System.out.println("i is ["+i+"] bullets size is ["+bullets.size()+"] j is ["+j+"] + tanks size is ["+tanks.size()+"]");
-				if(i<bullets.size()) {
-					bullets.get(i).collideWith(tanks.get(j));
-				}
-			}
-		}
-
-		for(int i=0;i<explodes.size();i++) {
-			explodes.get(i).paint(g);
-		}
+		gm.paint(g);
 	}
 
 	class MyKeyListener extends KeyAdapter {
@@ -135,7 +103,7 @@ public class TankFrame extends Frame {
 
 				case KeyEvent.VK_CONTROL:
 					String skey = ProrertyMgr.getString("goodFs");
-					myTank.fire(strategyMap.get(skey));
+					gm.getMainTank().fire(gm.strategyMap.get(skey));
 					break;
 				default:
 					break;
@@ -144,6 +112,7 @@ public class TankFrame extends Frame {
 		}
 
 		private void setMainTankDir() {
+			Tank myTank = gm.getMainTank();
 			if (!BL && !BR && !BU && !BD) {
 				myTank.setMoveing(false);
 			} else {

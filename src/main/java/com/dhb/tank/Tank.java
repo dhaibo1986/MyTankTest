@@ -17,14 +17,13 @@ public class Tank {
 	private boolean living = true;
 	private boolean moveing = true;
 
-	private TankFrame tf = null;
+	private GameModel gm;
 
-
-	public Tank(int x, int y, Dir dir, Group group, TankFrame tf) {
+	public Tank(int x, int y, Dir dir, Group group, GameModel gm) {
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
-		this.tf = tf;
+		this.gm = gm;
 		this.group = group;
 		rect.x = x;
 		rect.y = y;
@@ -42,7 +41,7 @@ public class Tank {
 
 	public void paint(Graphics g) {
 		if (!living) {
-			tf.tanks.remove(this);
+			gm.tanks.remove(this);
 			return;
 		}
 		switch (dir) {
@@ -100,7 +99,7 @@ public class Tank {
 		rect.y = y;
 		if (this.group == Group.BAD && random.nextInt(20) > 18) {
 			String skey = ProrertyMgr.getString("goodFs");
-			this.fire(this.tf.strategyMap.get(skey));
+			this.fire(this.gm.strategyMap.get(skey));
 		}
 		if (this.group == Group.BAD && random.nextInt(20) > 18) {
 			randomDir();
@@ -177,12 +176,11 @@ public class Tank {
 		this.living = living;
 	}
 
-	public TankFrame getTf() {
-		return tf;
+	public GameModel getGm() {
+		return gm;
 	}
 
-	public void setTf(TankFrame tf) {
-		this.tf = tf;
+	public void setGm(GameModel gm) {
+		this.gm = gm;
 	}
-
 }

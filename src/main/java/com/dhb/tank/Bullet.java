@@ -11,15 +11,15 @@ public class Bullet {
 	private int x;
 	private int y;
 	private Dir dir;
-	private TankFrame tf;
 	private Group group = Group.BAD;
 	private boolean living = true;
+	GameModel gm;
 
-	public Bullet(int x, int y, Dir dir, Group group, TankFrame tf) {
+	public Bullet(int x, int y, Dir dir, Group group, GameModel gm) {
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
-		this.tf = tf;
+		this.gm = gm;
 		this.group = group;
 		rect.x = this.x;
 		rect.y = this.y;
@@ -33,7 +33,7 @@ public class Bullet {
 
 	public void die() {
 		this.living = false;
-		this.tf.bullets.remove(this);
+		this.gm.bullets.remove(this);
 	}
 
 	public void paint(Graphics g) {
@@ -66,13 +66,13 @@ public class Bullet {
 			this.die();
 			int eX = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
 			int eY = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
-			this.tf.explodes.add(new Explode(eX, eY, true, this.tf));
+			this.gm.explodes.add(new Explode(eX, eY, true, this.gm));
 		}
 	}
 
 	private void move() {
 		if (!living) {
-			tf.bullets.remove(this);
+			gm.bullets.remove(this);
 		}
 		switch (dir) {
 			case LEFT:
@@ -138,11 +138,11 @@ public class Bullet {
 		this.dir = dir;
 	}
 
-	public TankFrame getTf() {
-		return tf;
+	public GameModel getGm() {
+		return gm;
 	}
 
-	public void setTf(TankFrame tf) {
-		this.tf = tf;
+	public void setGm(GameModel gm) {
+		this.gm = gm;
 	}
 }

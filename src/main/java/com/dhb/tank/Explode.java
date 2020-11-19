@@ -14,15 +14,15 @@ public class Explode extends BaseExplode {
 
 	private boolean living = true;
 
-	TankFrame tf;
+	GameModel gm;
 
 	private int step = 0;
 
-	public Explode(int x, int y, boolean living, TankFrame tf) {
+	public Explode(int x, int y, boolean living, GameModel tf) {
 		this.x = x;
 		this.y = y;
 		this.living = living;
-		this.tf = tf;
+		this.gm = gm;
 	}
 
 	@Override
@@ -30,7 +30,7 @@ public class Explode extends BaseExplode {
 		g.drawImage(ResourseMgr.getInstance().getExplodes()[step++],x,y,null);
 		if(step >= ResourseMgr.getInstance().getExplodes().length) {
 			step = 0;
-			this.tf.explodes.remove(this);
+			this.gm.explodes.remove(this);
 		}
 	}
 
@@ -58,11 +58,11 @@ public class Explode extends BaseExplode {
 		this.living = living;
 	}
 
-	public TankFrame getTf() {
-		return tf;
+	public GameModel getGm() {
+		return gm;
 	}
 
-	public void setTf(TankFrame tf) {
-		this.tf = tf;
+	public void setGm(GameModel gm) {
+		this.gm = gm;
 	}
 }
