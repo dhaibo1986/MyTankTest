@@ -1,5 +1,7 @@
-package com.dhb.tank;
+package com.dhb.tank.strategy;
 
+
+import com.dhb.tank.*;
 
 public class FourDirFireStrategy implements FireStrategy {
 
@@ -19,7 +21,7 @@ public class FourDirFireStrategy implements FireStrategy {
 
 		Dir[] dirs = Dir.values();
 		for (Dir dir : dirs) {
-			t.getGm().bullets.add(new Bullet(bX, bY, dir, t.getGroup(), t.getGm()));
+			t.getGm().add(new Bullet(bX, bY, dir, t.getGroup(), t.getGm()));
 		}
 		if (t.getGroup() == Group.GOOD) {
 			new Thread(() -> {

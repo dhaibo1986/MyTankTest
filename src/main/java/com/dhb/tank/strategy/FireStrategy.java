@@ -1,4 +1,6 @@
-package com.dhb.tank;
+package com.dhb.tank.strategy;
+
+import com.dhb.tank.Tank;
 
 public interface FireStrategy {
 

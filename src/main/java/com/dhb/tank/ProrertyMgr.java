@@ -1,6 +1,8 @@
 package com.dhb.tank;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 /**
 *@author haibo.duan
@@ -28,6 +30,18 @@ public class ProrertyMgr {
 			return null;
 		}
 		return props.get(key);
+	}
+
+	public static List<String> getList(String key) {
+		List<String> result = new ArrayList<>();
+		if(props != null && null != props.get(key)) {
+			String str = (String) props.get(key);
+			String[] array = str.split(",");
+			for(String item:array){
+				result.add(item);
+			}
+		}
+		return result;
 	}
 
 	public static Integer getInt(String key) {

@@ -1,5 +1,10 @@
 package com.dhb.tank;
 
+import com.dhb.tank.cor.ColiderChain;
+import com.dhb.tank.strategy.DefaultFireStrategy;
+import com.dhb.tank.strategy.FireStrategy;
+import com.dhb.tank.strategy.FourDirFireStrategy;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,13 +14,24 @@ import java.util.Map;
 public class GameModel {
 
 	Tank myTank = new Tank(200, 400, Dir.UP,Group.GOOD,this);
-	List<Bullet> bullets = new ArrayList<>();
-	List<Tank>  tanks = new ArrayList<>();
-	List<Explode> explodes = new ArrayList<>();
+	private List<Bullet> bullets = new ArrayList<>();
+	private List<Tank>  tanks = new ArrayList<>();
+	private List<Explode> explodes = new ArrayList<>();
+	private List<GameObject> objects = new ArrayList<>();
 
-	Map<String,FireStrategy> strategyMap = new HashMap<>();
+	Map<String, FireStrategy> strategyMap = new HashMap<>();
 
+	ColiderChain chain = new ColiderChain();
 
+	public void add(GameObject go) {
+		this.objects.add(go);
+	}
+	public List<GameObject> getGameObjects() {
+		return objects;
+	}
+	public void remove(GameObject go) {
+		this.objects.remove(go);
+	}
 
 	public GameModel() {
 		strategyMap.put(FourDirFireStrategy.class.getSimpleName(), FourDirFireStrategy.getInstance());
@@ -23,7 +39,7 @@ public class GameModel {
 		int initTankCount = Integer.parseInt((String) ProrertyMgr.get("initTankCount"));
 		//初始化敌方坦克
 		for (int i = 0; i < initTankCount; i++) {
-			this.tanks.add(new Tank(50 + i * 80, 200, Dir.DOWN, Group.BAD, this));
+			this.objects.add(new Tank(50 + i * 80, 200, Dir.DOWN, Group.BAD, this));
 		}
 	}
 
@@ -35,24 +51,25 @@ public class GameModel {
 		g.drawString("爆炸数量："+explodes.size(),10,90);
 		g.setColor(c);
 		myTank.paint(g);
-		for(int i=0;i<tanks.size();i++) {
-			tanks.get(i).paint(g);
-		}
-		for(int i=0;i< bullets.size();i++){
-			bullets.get(i).paint(g);
+		for(int i=0;i<objects.size();i++) {
+			objects.get(i).paint(g);
 		}
 
-		for(int i=0;i<bullets.size();i++) {
-			for(int j=0;j<tanks.size();j++) {
-				System.out.println("i is ["+i+"] bullets size is ["+bullets.size()+"] j is ["+j+"] + tanks size is ["+tanks.size()+"]");
-				if(i<bullets.size()) {
-					bullets.get(i).collideWith(tanks.get(j));
-				}
+		for(int i=0;i<objects.size();i++) {
+			for(int j=i+1;j<objects.size();j++) {
+				GameObject o1 = objects.get(i);
+				GameObject o2 = objects.get(j);
+				chain.colide(o1,o2);
 			}
 		}
 
-		for(int i=0;i<explodes.size();i++) {
-			explodes.get(i).paint(g);
+		//碰撞逻辑
+		for(int i=0;i<objects.size();i++) {
+			for(int j=i+1;j<objects.size();j++) {
+				GameObject o1 = objects.get(i);
+				GameObject o2 = objects.get(j);
+
+			}
 		}
 	}
 

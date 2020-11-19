@@ -18,7 +18,7 @@ public class Explode extends BaseExplode {
 
 	private int step = 0;
 
-	public Explode(int x, int y, boolean living, GameModel tf) {
+	public Explode(int x, int y, boolean living, GameModel gm) {
 		this.x = x;
 		this.y = y;
 		this.living = living;
@@ -30,7 +30,9 @@ public class Explode extends BaseExplode {
 		g.drawImage(ResourseMgr.getInstance().getExplodes()[step++],x,y,null);
 		if(step >= ResourseMgr.getInstance().getExplodes().length) {
 			step = 0;
-			this.gm.explodes.remove(this);
+			if(null != this.gm){
+				this.gm.remove(this);
+			}
 		}
 	}
 

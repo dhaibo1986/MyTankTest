@@ -1,16 +1,22 @@
 package com.dhb.tank;
 
 
+import com.dhb.tank.strategy.FireStrategy;
+
 import java.awt.*;
 import java.util.Random;
 
-public class Tank {
+public class Tank extends GameObject{
 	public static final int SPEED = 5;
 	public static final int WIDTH = ResourseMgr.getInstance().getGoodTankU().getWidth();
 	public static final int HEIGHT = ResourseMgr.getInstance().getGoodTankU().getHeight();
 	Rectangle rect = new Rectangle();
 	private int x;
 	private int y;
+
+	private int oldX;
+	private int oldY;
+
 	private Dir dir = Dir.DOWN;
 	private Random random = new Random();
 	private Group group = Group.BAD;
@@ -39,9 +45,14 @@ public class Tank {
 		this.living = false;
 	}
 
+	public void stop() {
+		this.moveing = false;
+	}
+
+	@Override
 	public void paint(Graphics g) {
 		if (!living) {
-			gm.tanks.remove(this);
+			gm.remove(this);
 			return;
 		}
 		switch (dir) {
@@ -95,6 +106,8 @@ public class Tank {
 					break;
 			}
 		}
+		oldX = x;
+		oldY = y;
 		rect.x = x;
 		rect.y = y;
 		if (this.group == Group.BAD && random.nextInt(20) > 18) {
@@ -182,5 +195,21 @@ public class Tank {
 
 	public void setGm(GameModel gm) {
 		this.gm = gm;
+	}
+
+	public int getOldX() {
+		return oldX;
+	}
+
+	public void setOldX(int oldX) {
+		this.oldX = oldX;
+	}
+
+	public int getOldY() {
+		return oldY;
+	}
+
+	public void setOldY(int oldY) {
+		this.oldY = oldY;
 	}
 }

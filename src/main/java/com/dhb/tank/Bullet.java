@@ -2,7 +2,7 @@ package com.dhb.tank;
 
 import java.awt.*;
 
-public class Bullet {
+public class Bullet extends GameObject{
 
 	public static final int SPEED = 10;
 	public static final int WIDTH = ResourseMgr.getInstance().getBulletD().getWidth(),
@@ -33,9 +33,10 @@ public class Bullet {
 
 	public void die() {
 		this.living = false;
-		this.gm.bullets.remove(this);
+		this.gm.remove(this);
 	}
 
+	@Override
 	public void paint(Graphics g) {
 		switch (dir) {
 			case LEFT:
@@ -66,13 +67,13 @@ public class Bullet {
 			this.die();
 			int eX = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
 			int eY = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
-			this.gm.explodes.add(new Explode(eX, eY, true, this.gm));
+			this.gm.add(new Explode(eX, eY, true, this.gm));
 		}
 	}
 
 	private void move() {
 		if (!living) {
-			gm.bullets.remove(this);
+			gm.remove(this);
 		}
 		switch (dir) {
 			case LEFT:
@@ -144,5 +145,13 @@ public class Bullet {
 
 	public void setGm(GameModel gm) {
 		this.gm = gm;
+	}
+
+	public Rectangle getRect() {
+		return rect;
+	}
+
+	public void setRect(Rectangle rect) {
+		this.rect = rect;
 	}
 }
