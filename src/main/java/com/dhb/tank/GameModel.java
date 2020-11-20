@@ -14,10 +14,9 @@ import java.util.Map;
 public class GameModel {
 
 	Tank myTank = new Tank(200, 400, Dir.UP,Group.GOOD,this);
-	private List<Bullet> bullets = new ArrayList<>();
-	private List<Tank>  tanks = new ArrayList<>();
-	private List<Explode> explodes = new ArrayList<>();
 	private List<GameObject> objects = new ArrayList<>();
+
+
 
 	Map<String, FireStrategy> strategyMap = new HashMap<>();
 
@@ -41,14 +40,19 @@ public class GameModel {
 		for (int i = 0; i < initTankCount; i++) {
 			this.objects.add(new Tank(50 + i * 80, 200, Dir.DOWN, Group.BAD, this));
 		}
+		//初始化墙
+		add(new Wall(150,150,200,50));
+		add(new Wall(550,150,200,50));
+		add(new Wall(300,300,50,200));
+		add(new Wall(650,300,50,200));
 	}
 
 	public void paint(Graphics g) {
 		Color c = g.getColor();
 		g.setColor(Color.WHITE);
-		g.drawString("子弹的数量："+bullets.size(),10,60);
-		g.drawString("敌方坦克数量："+tanks.size(),10,75);
-		g.drawString("爆炸数量："+explodes.size(),10,90);
+//		g.drawString("子弹的数量："+bullets.size(),10,60);
+//		g.drawString("敌方坦克数量："+tanks.size(),10,75);
+//		g.drawString("爆炸数量："+explodes.size(),10,90);
 		g.setColor(c);
 		myTank.paint(g);
 		for(int i=0;i<objects.size();i++) {

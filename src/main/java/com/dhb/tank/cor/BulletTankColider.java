@@ -13,7 +13,7 @@ public class BulletTankColider implements Colider {
 			Bullet bullet = (Bullet) o1;
 			Tank tank = (Tank) o2;
 			if (bullet.getGroup() == tank.getGroup()) {
-				return false;
+				return true;
 			}
 			if (bullet.getRect().intersects(tank.getRect())) {
 				tank.die();
@@ -22,10 +22,9 @@ public class BulletTankColider implements Colider {
 				int eY = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
 				bullet.getGm().add(new Explode(eX, eY, true, bullet.getGm()));
 			}
+			return false;
 		} else if(o2 instanceof Bullet && o1 instanceof Tank) {
 			colide(o2,o1);
-		}else  {
-			return false;
 		}
 		return true;
 	}

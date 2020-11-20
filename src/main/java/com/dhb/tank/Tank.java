@@ -126,7 +126,7 @@ public class Tank extends GameObject{
 		x = oldX;
 		y = oldY;
 		//改变方向
-		this.dir = Dir.getOppositeDir(dir);
+//		this.dir = Dir.getOppositeDir(dir);
 	}
 
 	private void boundsCheck() {

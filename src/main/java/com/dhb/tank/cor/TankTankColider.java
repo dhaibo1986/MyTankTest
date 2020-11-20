@@ -14,8 +14,6 @@ public class TankTankColider implements Colider {
 				t1.back();
 				t2.back();
 			}
-		} else  {
-			return true;
 		}
 		return true;
 	}

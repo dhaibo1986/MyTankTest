@@ -6,5 +6,8 @@ gameWidth=1000
 gameHeight=800
 
 #fireStragety
-goodFs=FourDirFireStrategy
+goodFs=DefaultFireStrategy
 badFs=DefaultFireStrategy
+#coliders
+coliders=com.dhb.tank.cor.TankTankColider,com.dhb.tank.cor.BulletWallColider,com.dhb.tank.cor.TankWallColider,com.dhb.tank.cor.BulletTankColider,com.dhb.tank.cor.BulletBulletColider
+

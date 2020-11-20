@@ -9,9 +9,15 @@ import java.util.List;
 public class ColiderChain implements Colider{
 
 	public ColiderChain() {
-		ProrertyMgr.getList("coliders");
-		this.coliders.add(new BulletTankColider());
-		this.coliders.add(new TankTankColider());
+		List<String> list  = ProrertyMgr.getList("coliders");
+		for(String clazz : list) {
+			try {
+				this.coliders.add((Colider) Class.forName(clazz).newInstance());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
 	}
 
 	private List<Colider> coliders = new LinkedList<>();
