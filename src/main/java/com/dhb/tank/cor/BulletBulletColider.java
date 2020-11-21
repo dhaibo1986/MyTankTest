@@ -1,9 +1,6 @@
 package com.dhb.tank.cor;
 
-import com.dhb.tank.Bullet;
-import com.dhb.tank.Explode;
-import com.dhb.tank.GameObject;
-import com.dhb.tank.Tank;
+import com.dhb.tank.*;
 
 public class BulletBulletColider implements Colider {
 
@@ -20,7 +17,7 @@ public class BulletBulletColider implements Colider {
 				bullet2.die();
 				int eX = bullet1.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
 				int eY = bullet1.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
-				bullet1.getGm().add(new Explode(eX, eY, true, bullet1.getGm()));
+				GameModel.getInstance().add(new Explode(eX, eY, true));
 			}
 			return false;
 		} else if(o2 instanceof Bullet && o1 instanceof Tank) {

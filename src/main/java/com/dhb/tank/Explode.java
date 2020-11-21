@@ -10,29 +10,25 @@ public class Explode extends BaseExplode {
 
 	public static int HEIGHT = ResourseMgr.getInstance().getExplodes()[0].getHeight();
 
-	private int x,y;
+	private int x, y;
 
 	private boolean living = true;
 
-	GameModel gm;
 
 	private int step = 0;
 
-	public Explode(int x, int y, boolean living, GameModel gm) {
+	public Explode(int x, int y, boolean living) {
 		this.x = x;
 		this.y = y;
 		this.living = living;
-		this.gm = gm;
 	}
 
 	@Override
 	public void paint(Graphics g) {
-		g.drawImage(ResourseMgr.getInstance().getExplodes()[step++],x,y,null);
-		if(step >= ResourseMgr.getInstance().getExplodes().length) {
+		g.drawImage(ResourseMgr.getInstance().getExplodes()[step++], x, y, null);
+		if (step >= ResourseMgr.getInstance().getExplodes().length) {
 			step = 0;
-			if(null != this.gm){
-				this.gm.remove(this);
-			}
+				GameModel.getInstance().remove(this);
 		}
 	}
 
@@ -58,13 +54,5 @@ public class Explode extends BaseExplode {
 
 	public void setLiving(boolean living) {
 		this.living = living;
-	}
-
-	public GameModel getGm() {
-		return gm;
-	}
-
-	public void setGm(GameModel gm) {
-		this.gm = gm;
 	}
 }

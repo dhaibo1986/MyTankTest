@@ -13,26 +13,12 @@ import java.util.Map;
 
 public class GameModel {
 
-	Tank myTank = new Tank(200, 400, Dir.UP,Group.GOOD,this);
+	Map<String, FireStrategy> strategyMap = new HashMap<>();
+	ColiderChain chain = new ColiderChain();
+	Tank myTank = new Tank(200, 400, Dir.UP, Group.GOOD, this);
 	private List<GameObject> objects = new ArrayList<>();
 
-
-
-	Map<String, FireStrategy> strategyMap = new HashMap<>();
-
-	ColiderChain chain = new ColiderChain();
-
-	public void add(GameObject go) {
-		this.objects.add(go);
-	}
-	public List<GameObject> getGameObjects() {
-		return objects;
-	}
-	public void remove(GameObject go) {
-		this.objects.remove(go);
-	}
-
-	public GameModel() {
+	private GameModel() {
 		strategyMap.put(FourDirFireStrategy.class.getSimpleName(), FourDirFireStrategy.getInstance());
 		strategyMap.put(DefaultFireStrategy.class.getSimpleName(), DefaultFireStrategy.getInstance());
 		int initTankCount = Integer.parseInt((String) ProrertyMgr.get("initTankCount"));
@@ -41,11 +27,28 @@ public class GameModel {
 			this.objects.add(new Tank(50 + i * 80, 200, Dir.DOWN, Group.BAD, this));
 		}
 		//初始化墙
-		add(new Wall(150,150,200,50));
-		add(new Wall(550,150,200,50));
-		add(new Wall(300,300,50,200));
-		add(new Wall(650,300,50,200));
+		add(new Wall(150, 150, 200, 50));
+		add(new Wall(550, 150, 200, 50));
+		add(new Wall(300, 300, 50, 200));
+		add(new Wall(650, 300, 50, 200));
 	}
+
+	public static GameModel getInstance() {
+		return Sigleton.INSTANCE.getInstance();
+	}
+
+	public void add(GameObject go) {
+		this.objects.add(go);
+	}
+
+	public List<GameObject> getGameObjects() {
+		return objects;
+	}
+
+	public void remove(GameObject go) {
+		this.objects.remove(go);
+	}
+
 
 	public void paint(Graphics g) {
 		Color c = g.getColor();
@@ -55,21 +58,21 @@ public class GameModel {
 //		g.drawString("爆炸数量："+explodes.size(),10,90);
 		g.setColor(c);
 		myTank.paint(g);
-		for(int i=0;i<objects.size();i++) {
+		for (int i = 0; i < objects.size(); i++) {
 			objects.get(i).paint(g);
 		}
 
-		for(int i=0;i<objects.size();i++) {
-			for(int j=i+1;j<objects.size();j++) {
+		for (int i = 0; i < objects.size(); i++) {
+			for (int j = i + 1; j < objects.size(); j++) {
 				GameObject o1 = objects.get(i);
 				GameObject o2 = objects.get(j);
-				chain.colide(o1,o2);
+				chain.colide(o1, o2);
 			}
 		}
 
 		//碰撞逻辑
-		for(int i=0;i<objects.size();i++) {
-			for(int j=i+1;j<objects.size();j++) {
+		for (int i = 0; i < objects.size(); i++) {
+			for (int j = i + 1; j < objects.size(); j++) {
 				GameObject o1 = objects.get(i);
 				GameObject o2 = objects.get(j);
 
@@ -79,5 +82,19 @@ public class GameModel {
 
 	public Tank getMainTank() {
 		return myTank;
+	}
+
+	private enum Sigleton {
+		INSTANCE;
+
+		private GameModel instance;
+
+		Sigleton() {
+			instance = new GameModel();
+		}
+
+		public GameModel getInstance() {
+			return instance;
+		}
 	}
 }

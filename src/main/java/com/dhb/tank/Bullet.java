@@ -13,13 +13,11 @@ public class Bullet extends GameObject{
 	private Dir dir;
 	private Group group = Group.BAD;
 	private boolean living = true;
-	GameModel gm;
 
-	public Bullet(int x, int y, Dir dir, Group group, GameModel gm) {
+	public Bullet(int x, int y, Dir dir, Group group) {
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
-		this.gm = gm;
 		this.group = group;
 		rect.x = this.x;
 		rect.y = this.y;
@@ -33,7 +31,7 @@ public class Bullet extends GameObject{
 
 	public void die() {
 		this.living = false;
-		this.gm.remove(this);
+		GameModel.getInstance().remove(this);
 	}
 
 	@Override
@@ -67,13 +65,13 @@ public class Bullet extends GameObject{
 			this.die();
 			int eX = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
 			int eY = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
-			this.gm.add(new Explode(eX, eY, true, this.gm));
+			GameModel.getInstance().add(new Explode(eX, eY, true));
 		}
 	}
 
 	private void move() {
 		if (!living) {
-			gm.remove(this);
+			GameModel.getInstance().remove(this);
 		}
 		switch (dir) {
 			case LEFT:
@@ -137,14 +135,6 @@ public class Bullet extends GameObject{
 
 	public void setDir(Dir dir) {
 		this.dir = dir;
-	}
-
-	public GameModel getGm() {
-		return gm;
-	}
-
-	public void setGm(GameModel gm) {
-		this.gm = gm;
 	}
 
 	public Rectangle getRect() {

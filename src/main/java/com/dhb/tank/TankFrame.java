@@ -8,15 +8,13 @@ import java.awt.event.WindowEvent;
 
 public class TankFrame extends Frame {
 
-	GameModel gm = new GameModel();
 
 	public static final int SPEED = 10;
 
 
 	public static final int GAME_WIDTH = ProrertyMgr.getInt("gameWidth");
 	public static final int GAME_HEIGHT = ProrertyMgr.getInt("gameHeight");
-
-
+	Image offScreenImage = null;
 
 	public TankFrame() {
 		setSize(GAME_WIDTH, GAME_HEIGHT);
@@ -34,25 +32,23 @@ public class TankFrame extends Frame {
 		this.addKeyListener(new MyKeyListener());
 	}
 
-	Image offScreenImage = null;
-
 	@Override
 	public void update(Graphics g) {
-		if(offScreenImage == null) {
+		if (offScreenImage == null) {
 			offScreenImage = this.createImage(GAME_WIDTH, GAME_HEIGHT);
 		}
 		Graphics gOffScreen = offScreenImage.getGraphics();
 		Color c = gOffScreen.getColor();
 		gOffScreen.setColor(Color.BLACK);
-		gOffScreen.fillRect(0,0,GAME_WIDTH,GAME_HEIGHT);
+		gOffScreen.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 		gOffScreen.setColor(c);
 		paint(gOffScreen);
-		g.drawImage(offScreenImage,0,0,null);
+		g.drawImage(offScreenImage, 0, 0, null);
 	}
 
 	@Override
 	public void paint(Graphics g) {
-		gm.paint(g);
+		GameModel.getInstance().paint(g);
 	}
 
 	class MyKeyListener extends KeyAdapter {
@@ -103,7 +99,7 @@ public class TankFrame extends Frame {
 
 				case KeyEvent.VK_CONTROL:
 					String skey = ProrertyMgr.getString("goodFs");
-					gm.getMainTank().fire(gm.strategyMap.get(skey));
+					GameModel.getInstance().getMainTank().fire(GameModel.getInstance().strategyMap.get(skey));
 					break;
 				default:
 					break;
@@ -112,7 +108,7 @@ public class TankFrame extends Frame {
 		}
 
 		private void setMainTankDir() {
-			Tank myTank = gm.getMainTank();
+			Tank myTank = GameModel.getInstance().getMainTank();
 			if (!BL && !BR && !BU && !BD) {
 				myTank.setMoveing(false);
 			} else {

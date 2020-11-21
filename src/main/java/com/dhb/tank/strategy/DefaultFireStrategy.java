@@ -1,9 +1,6 @@
 package com.dhb.tank.strategy;
 
-import com.dhb.tank.Audio;
-import com.dhb.tank.Bullet;
-import com.dhb.tank.Group;
-import com.dhb.tank.Tank;
+import com.dhb.tank.*;
 
 public class DefaultFireStrategy implements FireStrategy {
 
@@ -19,7 +16,7 @@ public class DefaultFireStrategy implements FireStrategy {
 	public void fire(Tank t) {
 		int bX = t.getX() + Tank.WIDTH / 2 - Bullet.WIDTH / 2;
 		int bY = t.getY() + Tank.HEIGHT / 2 - Bullet.HEIGHT / 2;
-		t.getGm().add(new Bullet(bX, bY, t.getDir(), t.getGroup(), t.getGm()));
+		GameModel.getInstance().add(new Bullet(bX, bY, t.getDir(), t.getGroup()));
 		if (t.getGroup() == Group.GOOD) {
 			new Thread(() -> {
 				new Audio("audio/tank_fire.wav");
