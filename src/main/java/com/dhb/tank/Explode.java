@@ -21,6 +21,7 @@ public class Explode extends BaseExplode {
 		this.x = x;
 		this.y = y;
 		this.living = living;
+		GameModel.getInstance().add(this);
 	}
 
 	@Override

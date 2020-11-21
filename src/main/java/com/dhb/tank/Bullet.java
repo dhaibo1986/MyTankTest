@@ -23,6 +23,7 @@ public class Bullet extends GameObject{
 		rect.y = this.y;
 		rect.width = WIDTH;
 		rect.height = HEIGHT;
+		GameModel.getInstance().add(this);
 	}
 
 	public static int getSPEED() {
@@ -65,7 +66,8 @@ public class Bullet extends GameObject{
 			this.die();
 			int eX = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
 			int eY = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
-			GameModel.getInstance().add(new Explode(eX, eY, true));
+			//重构之后，将add方法放到构造函数中，从而降低耦合
+			new Explode(eX, eY, true);
 		}
 	}
 

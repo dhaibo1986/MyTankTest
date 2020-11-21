@@ -13,7 +13,7 @@ public class BulletWallColider implements Colider {
 				bullet.die();
 				int eX = bullet.getX() + Bullet.WIDTH / 2 - Bullet.WIDTH / 2;
 				int eY = bullet.getY() + Bullet.HEIGHT / 2 - Bullet.HEIGHT / 2;
-				GameModel.getInstance().add(new Explode(eX, eY, true));
+				new Explode(eX, eY, true);
 			}
 		} else if(o2 instanceof Bullet && o1 instanceof Wall) {
 			colide(o2,o1);

@@ -17,7 +17,7 @@ public class BulletTankColider implements Colider {
 				bullet.die();
 				int eX = tank.getX() + Tank.WIDTH / 2 - Explode.WIDTH / 2;
 				int eY = tank.getY() + Tank.HEIGHT / 2 - Explode.HEIGHT / 2;
-				GameModel.getInstance().add(new Explode(eX, eY, true));
+				new Explode(eX, eY, true);
 			}
 			return false;
 		} else if(o2 instanceof Bullet && o1 instanceof Tank) {

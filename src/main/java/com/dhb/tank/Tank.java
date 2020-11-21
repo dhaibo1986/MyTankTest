@@ -23,18 +23,19 @@ public class Tank extends GameObject{
 	private boolean living = true;
 	private boolean moveing = true;
 
-	private GameModel gm;
 
-	public Tank(int x, int y, Dir dir, Group group, GameModel gm) {
+	public Tank(int x, int y, Dir dir, Group group) {
 		this.x = x;
 		this.y = y;
 		this.dir = dir;
-		this.gm = gm;
 		this.group = group;
 		rect.x = x;
 		rect.y = y;
 		rect.height = HEIGHT;
 		rect.width = WIDTH;
+
+		GameModel.getInstance().add(this);
+
 	}
 
 	public static int getSPEED() {
@@ -52,7 +53,7 @@ public class Tank extends GameObject{
 	@Override
 	public void paint(Graphics g) {
 		if (!living) {
-			gm.remove(this);
+			GameModel.getInstance().remove(this);
 			return;
 		}
 		switch (dir) {
@@ -112,7 +113,7 @@ public class Tank extends GameObject{
 		rect.y = y;
 		if (this.group == Group.BAD && random.nextInt(20) > 18) {
 			String skey = ProrertyMgr.getString("goodFs");
-			this.fire(this.gm.strategyMap.get(skey));
+			this.fire(GameModel.getInstance().strategyMap.get(skey));
 		}
 		if (this.group == Group.BAD && random.nextInt(20) > 18) {
 			randomDir();
@@ -195,14 +196,6 @@ public class Tank extends GameObject{
 
 	public void setLiving(boolean living) {
 		this.living = living;
-	}
-
-	public GameModel getGm() {
-		return gm;
-	}
-
-	public void setGm(GameModel gm) {
-		this.gm = gm;
 	}
 
 	public int getOldX() {

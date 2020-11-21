@@ -13,24 +13,34 @@ import java.util.Map;
 
 public class GameModel {
 
+	static {
+		GameModel.getInstance().init();
+	}
+
 	Map<String, FireStrategy> strategyMap = new HashMap<>();
 	ColiderChain chain = new ColiderChain();
-	Tank myTank = new Tank(200, 400, Dir.UP, Group.GOOD, this);
+	Tank myTank;
 	private List<GameObject> objects = new ArrayList<>();
 
-	private GameModel() {
+	private void init() {
 		strategyMap.put(FourDirFireStrategy.class.getSimpleName(), FourDirFireStrategy.getInstance());
 		strategyMap.put(DefaultFireStrategy.class.getSimpleName(), DefaultFireStrategy.getInstance());
 		int initTankCount = Integer.parseInt((String) ProrertyMgr.get("initTankCount"));
+		//初始化主战坦克
+		myTank = new Tank(200, 400, Dir.UP, Group.GOOD);
 		//初始化敌方坦克
 		for (int i = 0; i < initTankCount; i++) {
-			this.objects.add(new Tank(50 + i * 80, 200, Dir.DOWN, Group.BAD, this));
+			new Tank(50 + i * 80, 200, Dir.DOWN, Group.BAD);
 		}
 		//初始化墙
-		add(new Wall(150, 150, 200, 50));
-		add(new Wall(550, 150, 200, 50));
-		add(new Wall(300, 300, 50, 200));
-		add(new Wall(650, 300, 50, 200));
+		new Wall(150, 150, 200, 50);
+		new Wall(550, 150, 200, 50);
+		new Wall(300, 300, 50, 200);
+		new Wall(650, 300, 50, 200);
+	}
+
+	private GameModel() {
+
 	}
 
 	public static GameModel getInstance() {
@@ -88,6 +98,7 @@ public class GameModel {
 		INSTANCE;
 
 		private GameModel instance;
+
 
 		Sigleton() {
 			instance = new GameModel();
