@@ -8,8 +8,6 @@ public class Bullet extends GameObject{
 	public static final int WIDTH = ResourseMgr.getInstance().getBulletD().getWidth(),
 			HEIGHT = ResourseMgr.getInstance().getBulletD().getHeight();
 	Rectangle rect = new Rectangle();
-	private int x;
-	private int y;
 	private Dir dir;
 	private Group group = Group.BAD;
 	private boolean living = true;
@@ -23,7 +21,6 @@ public class Bullet extends GameObject{
 		rect.y = this.y;
 		rect.width = WIDTH;
 		rect.height = HEIGHT;
-		GameModel.getInstance().add(this);
 	}
 
 	public static int getSPEED() {
@@ -33,6 +30,16 @@ public class Bullet extends GameObject{
 	public void die() {
 		this.living = false;
 		GameModel.getInstance().remove(this);
+	}
+
+	@Override
+	public int getWidth() {
+		return WIDTH;
+	}
+
+	@Override
+	public int getHeight() {
+		return HEIGHT;
 	}
 
 	@Override

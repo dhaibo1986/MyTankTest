@@ -1,16 +1,13 @@
 package com.dhb.tank;
 
-import com.dhb.tank.abstractfactory.BaseExplode;
-
 import java.awt.*;
 
-public class Explode extends BaseExplode {
+public class Explode extends GameObject {
 
 	public static int WIDTH = ResourseMgr.getInstance().getExplodes()[0].getWidth();
 
 	public static int HEIGHT = ResourseMgr.getInstance().getExplodes()[0].getHeight();
 
-	private int x, y;
 
 	private boolean living = true;
 
@@ -22,6 +19,16 @@ public class Explode extends BaseExplode {
 		this.y = y;
 		this.living = living;
 		GameModel.getInstance().add(this);
+	}
+
+	@Override
+	public int getWidth() {
+		return WIDTH;
+	}
+
+	@Override
+	public int getHeight() {
+		return HEIGHT;
 	}
 
 	@Override

@@ -10,7 +10,7 @@ public class Main {
 		new Thread(() -> new Audio("audio/war1.wav").loop()).start();
 		while (true) {
 			try {
-				TimeUnit.MILLISECONDS.sleep(50);
+				TimeUnit.MILLISECONDS.sleep(100);
 				tf.repaint();
 			} catch (InterruptedException e) {
 				e.printStackTrace();

@@ -34,6 +34,7 @@ public class RectExplode extends BaseExplode {
 
 	}
 
+
 	public int getX() {
 		return x;
 	}

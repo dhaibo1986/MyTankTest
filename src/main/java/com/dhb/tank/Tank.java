@@ -11,8 +11,6 @@ public class Tank extends GameObject{
 	public static final int WIDTH = ResourseMgr.getInstance().getGoodTankU().getWidth();
 	public static final int HEIGHT = ResourseMgr.getInstance().getGoodTankU().getHeight();
 	Rectangle rect = new Rectangle();
-	private int x;
-	private int y;
 
 	private int oldX;
 	private int oldY;
@@ -128,6 +126,16 @@ public class Tank extends GameObject{
 		y = oldY;
 		//改变方向
 //		this.dir = Dir.getOppositeDir(dir);
+	}
+
+	@Override
+	public int getWidth() {
+		return WIDTH;
+	}
+
+	@Override
+	public int getHeight() {
+		return HEIGHT;
 	}
 
 	private void boundsCheck() {
