@@ -21,6 +21,7 @@ public class Bullet extends GameObject{
 		rect.y = this.y;
 		rect.width = WIDTH;
 		rect.height = HEIGHT;
+		GameModel.getInstance().add(this);
 	}
 
 	public static int getSPEED() {

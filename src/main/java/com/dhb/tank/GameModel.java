@@ -59,6 +59,13 @@ public class GameModel {
 		this.objects.remove(go);
 	}
 
+	public Map<String, FireStrategy> getStrategyMap() {
+		return strategyMap;
+	}
+
+	public void setStrategyMap(Map<String, FireStrategy> strategyMap) {
+		this.strategyMap = strategyMap;
+	}
 
 	public void paint(Graphics g) {
 		Color c = g.getColor();

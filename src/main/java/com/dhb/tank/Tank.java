@@ -1,9 +1,14 @@
 package com.dhb.tank;
 
 
+import com.dhb.tank.observer.TankFireEvent;
+import com.dhb.tank.observer.TankFireHandler;
+import com.dhb.tank.observer.TankFireObserver;
 import com.dhb.tank.strategy.FireStrategy;
 
 import java.awt.*;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class Tank extends GameObject{
@@ -220,5 +225,15 @@ public class Tank extends GameObject{
 
 	public void setOldY(int oldY) {
 		this.oldY = oldY;
+	}
+
+	private List<TankFireObserver> fireObservers = Arrays.asList(new TankFireHandler());
+
+
+	public void handleFireKey() {
+		TankFireEvent event = new TankFireEvent(this);
+		for(TankFireObserver o : fireObservers) {
+			o.actionOnFire(event);
+		}
 	}
 }

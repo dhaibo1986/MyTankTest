@@ -98,8 +98,9 @@ public class TankFrame extends Frame {
 					break;
 
 				case KeyEvent.VK_CONTROL:
-					String skey = ProrertyMgr.getString("goodFs");
-					GameModel.getInstance().getMainTank().fire(GameModel.getInstance().strategyMap.get(skey));
+//					String skey = ProrertyMgr.getString("goodFs");
+//					GameModel.getInstance().getMainTank().fire(GameModel.getInstance().strategyMap.get(skey));
+					GameModel.getInstance().getMainTank().handleFireKey();
 					break;
 				default:
 					break;
