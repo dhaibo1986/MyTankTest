@@ -14,6 +14,8 @@ public class RectDecorator  extends GODecorator{
 
 	@Override
 	public void paint(Graphics g) {
+		this.x = go.x;
+		this.y = go.y;
 		super.paint(g);
 		Color c = g.getColor();
 		g.setColor(Color.YELLOW);
