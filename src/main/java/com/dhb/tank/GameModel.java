@@ -6,12 +6,13 @@ import com.dhb.tank.strategy.FireStrategy;
 import com.dhb.tank.strategy.FourDirFireStrategy;
 
 import java.awt.*;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class GameModel {
+public class GameModel implements Serializable {
 
 	static {
 		GameModel.getInstance().init();
@@ -113,6 +114,29 @@ public class GameModel {
 
 		public GameModel getInstance() {
 			return instance;
+		}
+
+	}
+
+	public void save() {
+		File f = new File("e:/test/tank.data");
+		try {
+			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f));
+			oos.writeObject(myTank);
+			oos.writeObject(objects);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void load() {
+		File f = new File("e:/test/tank.data");
+		try {
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
+			myTank = (Tank) ois.readObject();
+			objects = (List)ois.readObject();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }
