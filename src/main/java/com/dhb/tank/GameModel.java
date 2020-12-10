@@ -120,8 +120,7 @@ public class GameModel implements Serializable {
 
 	public void save() {
 		File f = new File("e:/test/tank.data");
-		try {
-			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f));
+		try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(f));) {
 			oos.writeObject(myTank);
 			oos.writeObject(objects);
 		} catch (IOException e) {
@@ -131,8 +130,7 @@ public class GameModel implements Serializable {
 
 	public void load() {
 		File f = new File("e:/test/tank.data");
-		try {
-			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));
+		try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(f));){
 			myTank = (Tank) ois.readObject();
 			objects = (List)ois.readObject();
 		} catch (Exception e) {
